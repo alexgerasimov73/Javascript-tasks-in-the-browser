@@ -16,17 +16,19 @@ let step = 0;
 currentPhoto.src = array[step];
 
 prevPhoto.onclick = () => {
-  currentPhoto.src = array[step--];
- if (step < 0) {
-    step = 4;
+  --step;
+  if (step < 0) {
+    step = array.length - 1;
   }
+  currentPhoto.src = array[step];
 }
 
 nextPhoto.onclick = () => {
-  currentPhoto.src = array[step++];
- if (step > 4) {
+  ++step;
+  if (step === array.length) {
     step = 0;    
   }
+  currentPhoto.src = array[step];
 }
 
 
