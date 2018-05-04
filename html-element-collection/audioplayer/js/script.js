@@ -18,13 +18,14 @@ let count = 0;
 
 backBtn.onclick = () => {
 	--step;
-	mediaplayer.classList.remove('play');
-	count = 0;
 	if (step < 0) {
 		step = musicArray.length - 1;
 	}
 	player.src = musicArray[step];
 	title.title = titleArray[step];
+	if (count % 2 === 1) {
+		player.play();
+	}
 }
 
 playStateBtn.onclick = () => {
@@ -47,11 +48,12 @@ stopBtn.onclick = () => {
 
 forwardBtn.onclick = () => {
 	++step;
-	mediaplayer.classList.remove('play');
-	count = 0;
 	if (step === musicArray.length) {
 		step = 0;
 	}
 	player.src = musicArray[step];
 	title.title = titleArray[step];
+	if (count % 2 === 1) {
+		player.play();
+	}
 }
