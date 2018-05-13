@@ -1,5 +1,6 @@
 const keys = document.getElementsByTagName('li');
 const audio = document.getElementsByTagName('audio');
+const piano = document.getElementsByTagName('ul')[0];
 const lowerSounds = [
   './sounds/lower/first.mp3',
   './sounds/lower/second.mp3',
@@ -27,8 +28,12 @@ const keysArray = Array.from(keys);
 function playPiano(event) {
   if (event.shiftKey) {
     sounds = lowerSounds;
-  } else if (event.ctrlKey) {
+    piano.classList.remove('middle');
+    piano.classList.add('lower');
+  } else if (event.altKey) {
     sounds = higherSounds;
+    piano.classList.remove('middle');
+    piano.classList.add('higher');
   } else {
     sounds = middleSounds;
   }
@@ -36,6 +41,17 @@ function playPiano(event) {
   audio[keysArray.indexOf(this)].play();
 }
 
+function classReset() {
+  if (piano.classList.contains('lower')) {
+      piano.classList.remove('lower');
+  } else if (piano.classList.contains('higher')) {
+    piano.classList.remove('higher');
+  }
+piano.classList.add('middle');
+}
+
 for (let key of keysArray) {
   key.addEventListener('click', playPiano);
 }
+
+document.addEventListener('keyup', classReset);
