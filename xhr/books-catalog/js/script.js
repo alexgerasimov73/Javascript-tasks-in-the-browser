@@ -2,6 +2,7 @@ const content = document.querySelector('#content');
 content.innerHTML = '';
 
 const request = new XMLHttpRequest();
+request.addEventListener('load', onLoad);
 request.open('GET', 'https://neto-api.herokuapp.com/book/', true);
 request.send();
 
@@ -15,5 +16,3 @@ function onLoad() {
     `;
   }
 }
-
-request.addEventListener('load', onLoad);
