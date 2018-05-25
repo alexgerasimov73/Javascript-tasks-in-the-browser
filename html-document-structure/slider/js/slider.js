@@ -21,21 +21,37 @@ function slider() {
       case first :
         document.querySelector('.slide-current').classList.remove('slide-current');
         slides.firstElementChild.classList.add('slide-current');
-        first.classList.add('disabled');
-        prev.classList.add('disabled');
-        next.classList.remove('disabled');
-        last.classList.remove('disabled');
+        disablePrev();
+        enableNext();
         break;
       case last :
         document.querySelector('.slide-current').classList.remove('slide-current');
         slides.lastElementChild.classList.add('slide-current');
-        next.classList.add('disabled');
-        last.classList.add('disabled');
-        prev.classList.remove('disabled');
-        first.classList.remove('disabled');
+        disableNext();
+        enablePrev();
         break;
     }
   }
+}
+
+function enableNext() {
+  next.classList.remove('disabled');
+  last.classList.remove('disabled');
+}
+
+function disableNext() {
+  next.classList.add('disabled');
+  last.classList.add('disabled');
+}
+
+function enablePrev() {
+  prev.classList.remove('disabled');
+  first.classList.remove('disabled');
+}
+
+function disablePrev() {
+  prev.classList.add('disabled');
+  first.classList.add('disabled');
 }
 
 function moveSlides(isForward) {
@@ -43,8 +59,16 @@ function moveSlides(isForward) {
   const activatedSlide = isForward ? currentSlide.nextElementSibling : currentSlide.previousElementSibling;
   currentSlide.classList.remove('slide-current');
   activatedSlide.classList.add('slide-current');
-  activatedSlide.nextElementSibling ? next.classList.remove('disabled') || last.classList.remove('disabled') : next.classList.add('disabled') || last.classList.add('disabled');
-  activatedSlide.previousElementSibling ? prev.classList.remove('disabled') || first.classList.remove('disabled') : prev.classList.add('disabled') || first.classList.add('disabled');
+  if (activatedSlide.nextElementSibling) {
+    enableNext();
+  } else {
+    disableNext();
+  }
+  if (activatedSlide.previousElementSibling) {
+    enablePrev();
+  } else {
+    disablePrev();
+  }
 }
 
 for (const button of buttons) {
