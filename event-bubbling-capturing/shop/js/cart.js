@@ -1,20 +1,8 @@
 'use strict';
 
-let addButtons = document.getElementsByClassName('add-to-cart');
-
-function add(event) {
-  event.preventDefault();
-  addToCart({title: this.dataset.title, price: this.dataset.price});
-}
-
-function addMore() {
-  for (const button of addButtons) {
-    button.addEventListener('click', add);
+list.addEventListener('click', event => {
+  if (event.target.classList.contains('add-to-cart')) {
+    event.preventDefault();
+    addToCart({title: event.target.dataset.title, price: event.target.dataset.price});
   }
-}
-
-for (const button of addButtons) {
-  button.addEventListener('click', add);
-}
-
-showMore.addEventListener('click', addMore);
+});
